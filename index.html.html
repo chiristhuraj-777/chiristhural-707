@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI & Advanced Hacking Concepts</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top, #0f0f0f, #000);
+      color: #00ffcc;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(90deg, #00ffcc, #0077ff);
+      color: black;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 10px #00ffe0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      background: #111;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #00ffcc;
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 8px 18px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      background: #00ffcc;
+      color: black;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      text-shadow: 0 0 15px #00ffcc;
+      animation: glow 2s infinite alternate;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #00ffcc;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 0 15px #00ffcc50;
+    }
+    .neon-btn {
+      display: inline-block;
+      padding: 10px 25px;
+      border: 2px solid #00ffcc;
+      border-radius: 25px;
+      color: #00ffcc;
+      font-weight: bold;
+      transition: 0.3s;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .neon-btn:hover {
+      background: #00ffcc;
+      color: black;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #00ffcc, 0 0 10px #0077ff; }
+      50% { text-shadow: 0 0 20px #00ffcc, 0 0 40px #0077ff; }
+      100% { text-shadow: 0 0 5px #00ffcc, 0 0 10px #0077ff; }
+    }
+    /* Chatbot */
+    #chatbox {
+      background: #000;
+      border: 1px solid #00ffcc;
+      padding: 15px;
+      height: 200px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      font-size: 0.95em;
+    }
+    #chatbox p { margin: 5px 0; }
+    .user { color: #00ffcc; }
+    .bot { color: #ffcc00; }
+    /* AI Assistant */
+    #assistant-output {
+      margin-top: 15px;
+      padding: 15px;
+      background: #000;
+      border-radius: 10px;
+      border: 1px solid #00ffcc;
+      min-height: 80px;
+    }
+    /* Quiz */
+    .quiz-question {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+    .quiz-option {
+      margin: 8px 0;
+      cursor: pointer;
+      padding: 8px 12px;
+      border: 1px solid #00ffcc;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .quiz-option:hover {
+      background: #00ffcc;
+      color: black;
+    }
+    #result {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+      color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+
+  <header>AI & Advanced Hacking Concepts</header>
+
+  <nav>
+    <a href="#ai">AI</a>
+    <a href="#tools">AI Tools</a>
+    <a href="#chatbot">AI Chatbot</a>
+    <a href="#assistant">AI Assistant</a>
+    <a href="#hacking">Hacking</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#future">Future</a>
+  </nav>
+
+  <!-- AI Intro -->
+  <section id="ai">
+    <h2>Artificial Intelligence</h2>
+    <div class="card">
+      <p>AI enables machines to learn, adapt, and simulate human intelligence. Major branches include:</p>
+      <ul>
+        <li>🤖 Machine Learning</li>
+        <li>🧠 Neural Networks</li>
+        <li>💬 Natural Language Processing</li>
+        <li>👁 Computer Vision</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- AI Tools -->
+  <section id="tools">
+    <h2>Popular AI Tools</h2>
+    <div class="card">
+      <ul>
+        <li><b>ChatGPT:</b> Conversational AI assistant.</li>
+        <li><b>MidJourney:</b> AI for image generation.</li>
+        <li><b>GitHub Copilot:</b> AI pair programmer.</li>
+        <li><b>DALL·E:</b> Text-to-image generation.</li>
+        <li><b>Google Bard:</b> AI conversational search.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- AI Chatbot -->
+    <section id="chatbot">
+    <h2>AI Chatbot Simulation</h2>
+    <div class="card">
+      <div id="chatbox"></div>
+      <input type="text" id="userInput" placeholder="Ask about AI or hacking..." style="width:80%;padding:8px;">
+      <button id="sendBtn" class="neon-btn">Send</button>
+    </div>
+  </section>
+
+  <script>
+    const chatbox = document.getElementById("chatbox");
+    const input = document.getElementById("userInput");
+    const button = document.getElementById("sendBtn");
+
+    function sendMessage() {
+      const userText = input.value.trim();
+      if (!userText) return;
+      chatbox.innerHTML += `<p class="user"><b>You:</b> ${userText}</p>`;
+
+      let botResponse = "I'm just a demo bot!";
+      const text = userText.toLowerCase();
+
+      if (text.includes("hello")) botResponse = "Hello! How can I help you with AI or hacking?";
+      else if (text.includes("ai")) botResponse = "AI simulates human intelligence in machines.";
+      else if (text.includes("hack")) botResponse = "Hacking is exploiting weaknesses in systems.";
+      else if (text.includes("tool")) botResponse = "Popular AI tools: ChatGPT, MidJourney, Copilot.";
+
+      chatbox.innerHTML += `<p class="bot"><b>Bot:</b> ${botResponse}</p>`;
+      input.value = "";
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    button.addEventListener("click", sendMessage);
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+
+
+  <!-- AI Assistant -->
+  <section id="assistant">
+    <h2>AI Assistant Panel</h2>
+    <div class="card">
+      <p>Choose a quick feature:</p>
+      <button class="neon-btn" data-type="tip">💡 AI Tip</button>
+      <button class="neon-btn" data-type="motivation">🔥 Motivation</button>
+      <button class="neon-btn" data-type="security">🔒 Security Advice</button>
+      <div id="assistant-output">Your AI assistant will respond here...</div>
+    </div>
+  </section>
+
+  <script>
+    const assistantOutput = document.getElementById("assistant-output");
+    const buttons = document.querySelectorAll("#assistant .neon-btn");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const type = btn.getAttribute("data-type");
+        let message = "";
+
+        if (type === "tip") message = "💡 Tip: Always update your software to reduce security risks.";
+        else if (type === "motivation") message = "🔥 Stay strong! Every pro hacker was once a beginner.";
+        else if (type === "security") message = "🔒 Use strong passwords & enable 2FA for extra protection.";
+
+        assistantOutput.textContent = message;
+      });
+    });
+  </script>
+
+
+  <!-- Hacking -->
+  <section id="hacking">
+    <h2>Advanced Hacking Concepts</h2>
+    <div class="card">
+      <ul>
+        <li>💻 SQL Injection</li>
+        <li>⚡ Cross-Site Scripting (XSS)</li>
+        <li>🎭 Phishing Attacks</li>
+        <li>🛡 Ethical Hacking</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <section id="quiz">
+    <h2>Cybersecurity Quiz</h2>
+    <div class="card" id="quiz-container">
+      <div id="questionBox" class="quiz-question"></div>
+      <div id="optionsBox"></div>
+      <div id="result"></div>
+    </div>
+  </section>
+
+
+  <!-- Future -->
+  <section id="future">
+    <h2>Future Scope</h2>
+    <div class="card">
+      <p>AI and hacking will merge in future cybersecurity. Expect AI-driven monitoring, self-healing networks, and AI-powered ethical hacking systems.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 AI & Hacking Concepts Project | Designed for Learning
+  </footer>
+
+  <script>
+    // Chatbot
+    function sendMessage() {
+      let input = document.getElementById("userInput").value;
+      if (input.trim() === "") return;
+      let chatbox = document.getElementById("chatbox");
+      chatbox.innerHTML += "<p class='user'><b>You:</b> " + input + "</p>";
+      let response = "I'm just a demo bot.";
+      if (input.toLowerCase().includes("hello")) response = "Hello! How can I help you in AI or hacking?";
+      else if (input.toLowerCase().includes("ai")) response = "AI is the simulation of human intelligence in machines.";
+      else if (input.toLowerCase().includes("hack")) response = "Hacking means exploiting weaknesses in systems.";
+      else if (input.toLowerCase().includes("tool")) response = "Popular AI tools: ChatGPT, MidJourney, Copilot.";
+      chatbox.innerHTML += "<p class='bot'><b>Bot:</b> " + response + "</p>";
+      document.getElementById("userInput").value = "";
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    // AI Assistant
+    function assistant(type) {
+      let out = document.getElementById("assistant-output");
+      let msg = "";
+      if (type === "tip") msg = "💡 Tip: Always update your software to reduce security risks.";
+      if (type === "motivation") msg = "🔥 Stay strong! Every pro hacker was once a beginner.";
+      if (type === "security") msg = "🔒 Use strong passwords & enable 2FA for extra protection.";
+      out.innerText = msg;
+    }
+
+    
+  
+  
+  
+  // Quiz Data
+  const quizData = [
+    { question: "1. What does SQL Injection target?", options: ["Web Design", "Databases", "Networking"], correct: 1 },
+    { question: "2. Which attack tricks users into revealing passwords?", options: ["Phishing", "DDoS", "Keylogging"], correct: 0 },
+    { question: "3. What does XSS stand for?", options: ["Cross-Site Scripting", "Extra Secure System", "XML Security Standard"], correct: 0 },
+    { question: "4. Which AI field deals with understanding language?", options: ["Neural Networks", "Computer Vision", "Natural Language Processing"], correct: 2 },
+    { question: "5. Ethical Hackers are also known as?", options: ["Black Hat Hackers", "White Hat Hackers", "Grey Hat Hackers"], correct: 1 }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+
+  function loadQuestion() {
+    if (currentQuestion < quizData.length) {
+      // Show question
+      document.getElementById("questionBox").innerText = quizData[currentQuestion].question;
+
+      // Show options
+      let optionsHTML = "";
+      quizData[currentQuestion].options.forEach((opt, i) => {
+        optionsHTML += `<div class="quiz-option" onclick="checkAnswer(${i})">${opt}</div>`;
+      });
+      document.getElementById("optionsBox").innerHTML = optionsHTML;
+
+      // Clear previous result
+      document.getElementById("result").innerText = "";
+    } else {
+      // Show Final Result
+      document.getElementById("quiz-container").innerHTML = `
+        <div style="text-align:center; padding:20px;">
+          <h3>🎉 Quiz Completed!</h3>
+          <p style="font-size:1.2rem; font-weight:bold;">
+            Your Score: ${score} / ${quizData.length}
+          </p>
+          <button onclick="restartQuiz()" style="padding:8px 16px; margin-top:10px; cursor:pointer;">Restart Quiz</button>
+        </div>
+      `;
+    }
+  }
+
+  function checkAnswer(selected) {
+    let correct = quizData[currentQuestion].correct;
+    if (selected === correct) {
+      score++;
+      document.getElementById("result").innerText = "✅ Correct!";
+    } else {
+      document.getElementById("result").innerText = "❌ Wrong!";
+    }
+
+    setTimeout(() => {
+      currentQuestion++;
+      loadQuestion();
+    }, 1000);
+  }
+
+  // ✅ FIXED Restart Quiz function
+  function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+
+    // Restore quiz HTML structure
+    document.getElementById("quiz-container").innerHTML = `
+      <div id="questionBox" class="quiz-question"></div>
+      <div id="optionsBox"></div>
+      <div id="result"></div>
+    `;
+
+    loadQuestion();
+  }
+
+  window.onload = loadQuestion;
+
+
+</script>
+</body>
+</html>
